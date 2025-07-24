@@ -1,0 +1,8 @@
+i) Try to create a single component for all action buttons as they have the same thing.
+ii) Jaha Jaha popover use kiye waha waha component separate karna hai
+iii) Fix portal issue with scroll as well as selects issue with 
+iv) optimise ask doubt
+v) optimize popover with direction and position
+
+If have time
+i) optimize practice quiz module

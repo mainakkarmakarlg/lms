@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap'); */
+/* <style> */
+/* </style> */
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  /* font-family: "Architects Daughter", serif !important; */
+  font-family: "Nunito", sans-serif !important;
+  user-select: none;
+  /* font-style: inherit; */
+  /* font-family: "Poppins", sans-serif; */
+  /* font-family: mon; */
+  /* overflow-y: hidden; */
+}
+
+
+math {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.shadow-custom {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.math-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Hide scrollbar by default */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Show scrollbar when the .scrollbar class is applied */
+.scrollbar::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+  height: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4); /* Scrollbar thumb color */
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Track background */
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  /* font-family: "Poppins", sans-serif; */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+}
+
+select {
+  cursor: pointer;
+  outline: none;
+  /* display: none; */
+  background: transparent;
+}
+ option {
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+
+*:focus{ outline: none; }
+
+
+@layer utilities {
+  .animate-slide-in-left {
+    animation: slideInLeft 0.5s forwards;
+  }
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s forwards;
+  }
+  .animate-slide-out-left {
+    animation: slideOutLeft 0.5s forwards;
+  }
+  .animate-slide-out-right {
+    animation: slideOutRight 0.5s forwards;
+  }
+
+  @keyframes slideInLeft {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0%); }
+  }
+  @keyframes slideInRight {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0%); }
+  }
+  @keyframes slideOutLeft {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-100%); }
+  }
+  @keyframes slideOutRight {
+    from { transform: translateX(0%); }
+    to { transform: translateX(100%); }
+  }
+}
