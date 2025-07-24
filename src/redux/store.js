@@ -24,6 +24,7 @@ import mockQuestionsSlice from "./slices/mock-quiz/mockQuestions";
 import mockQuestionNavigatorSlice from "./slices/mock-quiz/mockQuestionNavigator";
 import mockResultSlice from "./slices/mock-quiz/mockResult";
 import appSlice from "./slices/app";
+import lectureGuideSlice from "./slices/lectureguide/lectureGuide";
 
 export const store = configureStore({
   reducer: {
@@ -59,5 +60,8 @@ export const store = configureStore({
     mockQuestions: mockQuestionsSlice,
     mockQuestionNavigator: mockQuestionNavigatorSlice,
     mockResult: mockResultSlice,
+
+    // lectureGuide
+    lectureGuide: lectureGuideSlice,
   },
 });

@@ -14,6 +14,7 @@ import MockResult from "./pages/mock/MockResult";
 import ChildExamsPage from "./sections/quizes/mock-quiz/exams/ChildExamsPage";
 import MockQuizHome from "./pages/MockQuizHome";
 import NoQuestions from "./pages/NoQuestions";
+import LectureGuide from "./pages/LectureGuide";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
           <Route path="/error/:combination/:phone" element={<Error />} />
         </Route>
         <Route path="/not-enrolled" element={<UserNotFound />} />
+        <Route path="/lecture-guide" element={<LectureGuide />} />
       </Routes>
     </BrowserRouter>
   );

@@ -125,3 +125,16 @@ select {
     to { transform: translateX(100%); }
   }
 }
+
+
+.search-box {
+  width: 400px; /* Added 'px' for units */
+  height: 40px; /* Added 'px' for units */
+  border-radius: 8px;
+  display: flex; /* Added display flex to handle the gap */
+  gap: 4px;
+  transform: rotate(0deg); /* Used 'transform' to rotate (if needed) */
+  opacity: 1;
+  padding: 8px 16px; /* Shorthand for padding */
+  border: 1px solid #ccc; /* Added border style */
+}
