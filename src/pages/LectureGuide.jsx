@@ -12,15 +12,14 @@ function LectureGuide() {
   const details = useSelector((state) => state.lectureGuide.details);
   const dispatch = useDispatch();
 
-  // Handle chapter open/close
   const handleLecture = (mid, cid) => {
     const newOpenedIndices = new Set(openedIndices);
 
     if (openedIndices.has(cid)) {
-      newOpenedIndices.delete(cid); // Close the chapter
+      newOpenedIndices.delete(cid);
     } else {
-      newOpenedIndices.add(cid); // Open the chapter
-      dispatch(filterAllLectures({ mid, cid })); // Fetch lectures for the clicked chapter
+      newOpenedIndices.add(cid); 
+      dispatch(filterAllLectures({ mid, cid })); 
     }
 
     setOpenedIndices(newOpenedIndices);
@@ -33,7 +32,6 @@ function LectureGuide() {
       <div className="flex flex-col gap-2 w-[78%] mt-10">
         {details.map((m, index) => (
           <div key={index} className="flex flex-col gap-2 items-start w-full">
-            {/* Render subjects */}
             {m.Subjects.map((s, subIndex) => (
               <div
                 key={subIndex}
@@ -76,7 +74,6 @@ function LectureGuide() {
                         scrollbarColor: "#9ca3af #f3f4f6",
                       }}
                     >
-                      {/* Render lectures for the chapter */}
                       {s.chapterLectures.map((lecture, index) => (
                         <div
                           key={index}
