@@ -24,6 +24,9 @@ export const lectureGuide = createSlice({
         state.filteredLectures = [];
       }
     },
+    allLectures: (state) => {
+      return state.details;
+    },
 
     resetFilteredLectures: (state) => {
       state.filteredLectures = [];
