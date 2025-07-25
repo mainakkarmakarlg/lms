@@ -7,7 +7,9 @@ export const lectureGuide = createSlice({
   name: "mockQuizes",
   initialState,
   reducers: {
-    
+    allLectures: (state) => {
+      return state;
+    },
   },
 });
 
