@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
 function ChapterDropdown({ chapters, onChapterSelect }) {
-  const [selectedChapter, setSelectedChapter] = useState(""); // State for selected chapter
+  const [selectedChapter, setSelectedChapter] = useState("");
 
-  // Handle chapter selection
   const handleChapterChange = (e) => {
     const chapter = e.target.value;
-    setSelectedChapter(chapter); // Update selected chapter state
-    onChapterSelect(chapter); // Pass the selected chapter back to the parent
+    setSelectedChapter(chapter); 
+    onChapterSelect(chapter);
   };
 
   return (
