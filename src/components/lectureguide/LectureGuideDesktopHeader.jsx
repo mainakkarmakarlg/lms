@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PiTimer } from "react-icons/pi";
 import { MdSearch } from "react-icons/md";
 import { FaToggleOff } from "react-icons/fa";
 import { PiNotebookBold } from "react-icons/pi";
 import { FaToggleOn } from "react-icons/fa";
+import PopupWrapper from "../common/PopupWraper";
+import { useDispatch, useSelector } from "react-redux";
+import { subjectFilter } from "../../redux/slices/lectureguide/lectureGuide";
 
 function LectureGuideDesktopHeader() {
   const [activeTab, setActiveTab] = useState("All Lectures");
   const [isToggle, setISToggle] = useState(true);
+  const [selectedChapter, setSelectedChapter] = useState("");
+  const [popupActive, setPopUpActive] = useState(false);
+  const dispatch = useDispatch();
+  const { customDetails, chapter } = useSelector((state) => state.lectureGuide);
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
   };
+
+  const handleChapterChange = (event) => {
+    const chapterId = event.target.value;
+    setSelectedChapter(chapterId);
+  };
+  useEffect(() => {
+    dispatch(subjectFilter());
+    console.log(chapter);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col w-[750px] mt-12 bg-white py-4 px-10 justify-center gap-6 rounded-t-2xl shadow-lg lg:w-[1000px] xl:w-[1250px] 2xl:w-[1500px] ">
@@ -94,9 +110,39 @@ function LectureGuideDesktopHeader() {
             </div>
           </div>
 
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
+            onClick={() => setPopUpActive(true)}
+          >
             Filter
           </button>
+          {popupActive && (
+            <PopupWrapper onClose={() => setPopUpActive(false)}>
+              <div className="w-full max-w-md mx-auto">
+                <label
+                  htmlFor="chapter"
+                  className="block text-lg font-semibold mb-2"
+                >
+                  Select Chapter
+                </label>
+                <select
+                  id="chapter"
+                  value={selectedChapter}
+                  onChange={handleChapterChange}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                >
+                  <option value="" disabled>
+                    Select a Chapter
+                  </option>
+                  {chapter.map((chap, index) => (
+                    <option key={index} value={chap}>
+                      {`Chapter ${index + 1}: ${chap}`}{" "}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </PopupWrapper>
+          )}
         </div>
       </div>
     </div>

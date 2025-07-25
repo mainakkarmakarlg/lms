@@ -3,34 +3,31 @@ import { MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterAllLectures,
+  subjectFilter,
   updateCustomDetails,
 } from "../redux/slices/lectureguide/lectureGuide"; // Import the actions
 import LectureGuideDesktopHeader from "../components/lectureguide/LectureGuideDesktopHeader";
 
 function LectureGuide() {
-  const [openedIndices, setOpenedIndices] = useState(new Set()); // Track opened chapters
+  const [openedIndices, setOpenedIndices] = useState(new Set());
   const dispatch = useDispatch();
-  const customDetails = useSelector(
-    (state) => state.lectureGuide.customDetails
-  );
+  const { customDetails, chapter } = useSelector((state) => state.lectureGuide);
 
   const handleLecture = (mid, cid) => {
     const newOpenedIndices = new Set(openedIndices);
 
     if (openedIndices.has(cid)) {
-      newOpenedIndices.delete(cid); 
+      newOpenedIndices.delete(cid);
     } else {
-      newOpenedIndices.add(cid); 
+      newOpenedIndices.add(cid);
     }
 
     setOpenedIndices(newOpenedIndices);
   };
 
-  const handleModifyDetails = (updatedData) => {
-    dispatch(updateCustomDetails(updatedData));
-  };
-
   useEffect(() => {
+    dispatch(subjectFilter());
+    console.log(chapter);;
     dispatch(filterAllLectures({ mid: null, cid: null }));
   }, [dispatch]);
 
