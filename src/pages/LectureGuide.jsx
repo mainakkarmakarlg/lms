@@ -1,36 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { filterAllLectures } from "../redux/slices/lectureguide/lectureGuide"; // Import your action
+import {
+  filterAllLectures,
+  updateCustomDetails,
+} from "../redux/slices/lectureguide/lectureGuide"; // Import the actions
 import LectureGuideDesktopHeader from "../components/lectureguide/LectureGuideDesktopHeader";
 
 function LectureGuide() {
   const [openedIndices, setOpenedIndices] = useState(new Set()); // Track opened chapters
-  const filterLecture = useSelector(
-    (state) => state.lectureGuide.filteredLectures
-  );
-  const details = useSelector((state) => state.lectureGuide.details);
   const dispatch = useDispatch();
+  const customDetails = useSelector(
+    (state) => state.lectureGuide.customDetails
+  );
 
   const handleLecture = (mid, cid) => {
     const newOpenedIndices = new Set(openedIndices);
 
     if (openedIndices.has(cid)) {
-      newOpenedIndices.delete(cid);
+      newOpenedIndices.delete(cid); 
     } else {
       newOpenedIndices.add(cid); 
-      dispatch(filterAllLectures({ mid, cid })); 
     }
 
     setOpenedIndices(newOpenedIndices);
   };
+
+  const handleModifyDetails = (updatedData) => {
+    dispatch(updateCustomDetails(updatedData));
+  };
+
+  useEffect(() => {
+    dispatch(filterAllLectures({ mid: null, cid: null }));
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col items-center bg-gray-200 gap-2 min-h-screen">
       <LectureGuideDesktopHeader />
 
       <div className="flex flex-col gap-2 w-[78%] mt-10">
-        {details.map((m, index) => (
+        {customDetails.map((m, index) => (
           <div key={index} className="flex flex-col gap-2 items-start w-full">
             {m.Subjects.map((s, subIndex) => (
               <div
