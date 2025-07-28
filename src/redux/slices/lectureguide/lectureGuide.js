@@ -34,9 +34,7 @@ export const lectureGuide = createSlice({
     },
 
     subjectFilter: (state) => {
-      const chapterDetails = state.details.flatMap((s) =>
-        s.Subjects.map((c) => c.name)
-      );
+      const chapterDetails = state.details.flatMap((s) => s.Subjects);
       state.chapter = chapterDetails;
     },
 

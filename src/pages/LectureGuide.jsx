@@ -27,7 +27,7 @@ function LectureGuide() {
 
   useEffect(() => {
     dispatch(subjectFilter());
-    console.log(chapter);;
+    // console.log(chapter);
     dispatch(filterAllLectures({ mid: null, cid: null }));
   }, [dispatch]);
 

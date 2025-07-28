@@ -20,14 +20,18 @@ function LectureGuideDesktopHeader() {
     setActiveTab(tabName);
   };
 
-  const handleChapterChange = (event) => {
-    const chapterId = event.target.value;
-    setSelectedChapter(chapterId);
+  const handleChapterChange = (e) => {
+    const selectedChapterData = JSON.parse(e.target.value);
+    const { selectedChapter, subjectId } = selectedChapterData;
+    console.log("Selected Chapter ID:", selectedChapter);
+    console.log("Subject ID:", subjectId);
+    setSelectedChapter(subjectId);
   };
+
   useEffect(() => {
+    // console.log("Selected Chapter:", selectedChapter);
     dispatch(subjectFilter());
-    console.log(chapter);
-  }, [dispatch]);
+  }, [dispatch, selectedChapter]);
 
   return (
     <div className="flex flex-col w-[750px] mt-12 bg-white py-4 px-10 justify-center gap-6 rounded-t-2xl shadow-lg lg:w-[1000px] xl:w-[1250px] 2xl:w-[1500px] ">
@@ -118,7 +122,7 @@ function LectureGuideDesktopHeader() {
           </button>
           {popupActive && (
             <PopupWrapper onClose={() => setPopUpActive(false)}>
-              <div className="w-full max-w-md mx-auto">
+              <div className="w-full max-w-md mx-auto bg-green-300">
                 <label
                   htmlFor="chapter"
                   className="block text-lg font-semibold mb-2"
@@ -135,8 +139,14 @@ function LectureGuideDesktopHeader() {
                     Select a Chapter
                   </option>
                   {chapter.map((chap, index) => (
-                    <option key={index} value={chap}>
-                      {`Chapter ${index + 1}: ${chap}`}{" "}
+                    <option
+                      key={index}
+                      value={JSON.stringify({
+                        selectedChapter: chap.id,
+                        subjectId: chap.subjectId,
+                      })}
+                    >
+                      {`Chapter ${index + 1}: ${chap.name}`}
                     </option>
                   ))}
                 </select>
