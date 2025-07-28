@@ -2,7 +2,6 @@ import React from "react";
 import { CgNotes } from "react-icons/cg";
 import { CiFolderOn } from "react-icons/ci";
 import { HiOutlineLightBulb } from "react-icons/hi";
-import { AiOutlineLike } from "react-icons/ai";
 import { LuFlag } from "react-icons/lu";
 import { BiDislike, BiLike } from "react-icons/bi";
 import { IoIosPlayCircle } from "react-icons/io";
