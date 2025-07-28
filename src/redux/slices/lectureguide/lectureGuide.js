@@ -39,11 +39,9 @@ export const lectureGuide = createSlice({
     },
 
     filterChapterFromSubjects: (state, action) => {
-      const { deepCopy } = state.customDetails;
       const selectedSubject = state.customDetails.find(
-        (subject) => subject.id !== action.payload
+        (subject) => Number(subject.id) === action.payload
       );
-      console.log("selectedSub", selectedSubject);
       if (selectedSubject) {
         state.chapter = selectedSubject.Subjects;
       } else {

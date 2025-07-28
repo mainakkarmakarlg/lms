@@ -19,7 +19,6 @@ function LectureGuideDesktopHeader() {
   const [popupActive, setPopUpActive] = useState(false);
   const dispatch = useDispatch();
   const { customDetails, chapter } = useSelector((state) => state.lectureGuide);
-  console.log(chapter);
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -27,14 +26,14 @@ function LectureGuideDesktopHeader() {
 
   const handleChapterChange = (e) => {
     const selectedChapterData = JSON.parse(e.target.value);
-    const { selectedChapter, subjectId } = selectedChapterData;
+    const { selectedChapter } = selectedChapterData;
     setSelectedChapter(selectedChapter);
   };
 
   const handleSubjectChange = (e) => {
     const subjectId = e.target.value;
     setSelectedSubject(subjectId);
-    dispatch(filterChapterFromSubjects(subjectId));
+    dispatch(filterChapterFromSubjects(Number(subjectId)));
     console.log("Selected ID:", subjectId);
   };
 
@@ -42,6 +41,7 @@ function LectureGuideDesktopHeader() {
 
   useEffect(() => {
     dispatch(chapterFilter());
+    console.log(selectedChapter);
   }, [dispatch, selectedChapter]);
 
   return (
