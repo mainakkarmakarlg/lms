@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chapterFilter,
   filterAllLectures,
-} from "../redux/slices/lectureguide/lectureGuide"; // Import the actions
+} from "../redux/slices/lectureguide/lectureGuide";
 import LectureGuideDesktopHeader from "../components/lectureguide/LectureGuideDesktopHeader";
 
 import ChapterCardComponent from "../components/lectureguide/ChapterCardComponent";
@@ -12,7 +12,7 @@ import ChapterCardComponent from "../components/lectureguide/ChapterCardComponen
 function LectureGuide() {
   const [openedIndices, setOpenedIndices] = useState(new Set());
   const dispatch = useDispatch();
-  const { customDetails, chapter } = useSelector((state) => state.lectureGuide);
+  const { customDetails} = useSelector((state) => state.lectureGuide);
 
   const handleLecture = (mid, cid) => {
     const newOpenedIndices = new Set(openedIndices);

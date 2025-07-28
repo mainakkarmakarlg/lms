@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chapterFilter,
   filterChapterFromSubjects,
+  filterLecture,
 } from "../../redux/slices/lectureguide/lectureGuide";
 
 function LectureGuideDesktopHeader() {
@@ -37,15 +38,18 @@ function LectureGuideDesktopHeader() {
     console.log("Selected ID:", subjectId);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    setPopUpActive(false);
+    console.log("selectedSubject---", selectedSubject);
+    dispatch(filterLecture({ subjectId: Number(selectedSubject) }));
+  };
 
   useEffect(() => {
     dispatch(chapterFilter());
-    console.log(selectedChapter);
   }, [dispatch, selectedChapter]);
 
   return (
-    <div className="flex flex-col w-[750px] mt-12 bg-white py-4 px-10 justify-center gap-6 rounded-t-2xl shadow-lg lg:w-[1000px] xl:w-[1250px] 2xl:w-[1500px] ">
+    <div className="flex flex-col w-[750px] mt-12 bg-white py-4 px-10 justify-center gap-6 rounded-t-2xl shadow-lg lg:w-[1000px] xl:w-[1250px] 2xl:w-[1500px]">
       <div className="flex justify-between items-center">
         <p className="text-3xl font-semibold text-gray-800">
           Lecture Guide 2025
@@ -133,7 +137,7 @@ function LectureGuideDesktopHeader() {
           </button>
           {popupActive && (
             <PopupWrapper onClose={() => setPopUpActive(false)}>
-              <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
+              <div className="w-full max-w-md mx-auto">
                 {/* Select Subject */}
                 <label
                   htmlFor="subject"
@@ -179,8 +183,8 @@ function LectureGuideDesktopHeader() {
                     </option>
                   ))}
                 </select>
-                <button>Submit</button>
-              </form>
+                <button onClick={handleSubmit}>Submit</button>
+              </div>
             </PopupWrapper>
           )}
         </div>

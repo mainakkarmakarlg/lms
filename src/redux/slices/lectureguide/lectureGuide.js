@@ -49,6 +49,22 @@ export const lectureGuide = createSlice({
       }
     },
 
+    filterLecture: (state, action) => {
+      const { subjectId } = action.payload;
+
+      if (subjectId) {
+        const subjectFilter = state.details.find(
+          (m) => Number(m.id) === subjectId
+        );
+        if (subjectFilter) {
+          state.customDetails = [subjectFilter];
+        } else {
+          state.customDetails = [];
+        }
+      }
+      console.log("customDetails updated:", state.customDetails);
+    },
+
     resetFilteredLectures: (state) => {
       state.filteredLectures = [];
     },
@@ -61,6 +77,7 @@ export const {
   resetFilteredLectures,
   chapterFilter,
   filterChapterFromSubjects,
+  filterLecture,
 } = lectureGuide.actions;
 
 export default lectureGuide.reducer;
