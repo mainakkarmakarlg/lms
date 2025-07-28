@@ -8,15 +8,18 @@ import PopupWrapper from "../common/PopupWraper";
 import { useDispatch, useSelector } from "react-redux";
 import {
   chapterFilter,
+  filterChapterFromSubjects,
 } from "../../redux/slices/lectureguide/lectureGuide";
 
 function LectureGuideDesktopHeader() {
   const [activeTab, setActiveTab] = useState("All Lectures");
   const [isToggle, setISToggle] = useState(true);
   const [selectedChapter, setSelectedChapter] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
   const [popupActive, setPopUpActive] = useState(false);
   const dispatch = useDispatch();
   const { customDetails, chapter } = useSelector((state) => state.lectureGuide);
+  console.log(chapter);
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -25,9 +28,14 @@ function LectureGuideDesktopHeader() {
   const handleChapterChange = (e) => {
     const selectedChapterData = JSON.parse(e.target.value);
     const { selectedChapter, subjectId } = selectedChapterData;
-    console.log("Selected Chapter ID:", selectedChapter);
-    console.log("Subject ID:", subjectId);
-    setSelectedChapter(subjectId);
+    setSelectedChapter(selectedChapter);
+  };
+
+  const handleSubjectChange = (e) => {
+    const subjectId = e.target.value;
+    setSelectedSubject(subjectId);
+    dispatch(filterChapterFromSubjects(subjectId));
+    console.log("Selected ID:", subjectId);
   };
 
   const handleSubmit = () => {};
@@ -126,6 +134,30 @@ function LectureGuideDesktopHeader() {
           {popupActive && (
             <PopupWrapper onClose={() => setPopUpActive(false)}>
               <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
+                {/* Select Subject */}
+                <label
+                  htmlFor="subject"
+                  className="block text-lg font-semibold mb-2"
+                >
+                  Select Subject
+                </label>
+                <select
+                  id="subject"
+                  value={selectedSubject}
+                  onChange={handleSubjectChange}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                >
+                  <option value="" disabled>
+                    Select a Subject
+                  </option>
+                  {customDetails.map((subject, index) => (
+                    <option key={index} value={subject.id}>
+                      {subject.name}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Select Chapter */}
                 <label
                   htmlFor="chapter"
                   className="block text-lg font-semibold mb-2"
@@ -142,13 +174,7 @@ function LectureGuideDesktopHeader() {
                     Select a Chapter
                   </option>
                   {chapter.map((chap, index) => (
-                    <option
-                      key={index}
-                      value={JSON.stringify({
-                        selectedChapter: chap.id,
-                        subjectId: chap.subjectId,
-                      })}
-                    >
+                    <option key={index} value={chap.id}>
                       {`Chapter ${index + 1}: ${chap.name}`}
                     </option>
                   ))}

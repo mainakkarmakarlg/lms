@@ -38,6 +38,19 @@ export const lectureGuide = createSlice({
       state.chapter = chapterDetails;
     },
 
+    filterChapterFromSubjects: (state, action) => {
+      const { deepCopy } = state.customDetails;
+      const selectedSubject = deepCopy.find(
+        (subject) => subject.id === action.payload
+      );
+      console.log("selectedSub", selectedSubject);
+      if (selectedSubject) {
+        state.chapter = selectedSubject.Subjects;
+      } else {
+        state.chapter = [];
+      }
+    },
+
     resetFilteredLectures: (state) => {
       state.filteredLectures = [];
     },
@@ -49,6 +62,7 @@ export const {
   updateCustomDetails,
   resetFilteredLectures,
   chapterFilter,
+  filterChapterFromSubjects,
 } = lectureGuide.actions;
 
 export default lectureGuide.reducer;
