@@ -33,7 +33,7 @@ export const lectureGuide = createSlice({
       state.customDetails = updatedDetails;
     },
 
-    subjectFilter: (state) => {
+    chapterFilter: (state) => {
       const chapterDetails = state.details.flatMap((s) => s.Subjects);
       state.chapter = chapterDetails;
     },
@@ -48,7 +48,7 @@ export const {
   filterAllLectures,
   updateCustomDetails,
   resetFilteredLectures,
-  subjectFilter,
+  chapterFilter,
 } = lectureGuide.actions;
 
 export default lectureGuide.reducer;

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  chapterFilter,
   filterAllLectures,
-  subjectFilter,
-  updateCustomDetails,
 } from "../redux/slices/lectureguide/lectureGuide"; // Import the actions
 import LectureGuideDesktopHeader from "../components/lectureguide/LectureGuideDesktopHeader";
 
@@ -26,7 +25,7 @@ function LectureGuide() {
   };
 
   useEffect(() => {
-    dispatch(subjectFilter());
+    dispatch(chapterFilter());
     // console.log(chapter);
     dispatch(filterAllLectures({ mid: null, cid: null }));
   }, [dispatch]);

@@ -6,7 +6,9 @@ import { PiNotebookBold } from "react-icons/pi";
 import { FaToggleOn } from "react-icons/fa";
 import PopupWrapper from "../common/PopupWraper";
 import { useDispatch, useSelector } from "react-redux";
-import { subjectFilter } from "../../redux/slices/lectureguide/lectureGuide";
+import {
+  chapterFilter,
+} from "../../redux/slices/lectureguide/lectureGuide";
 
 function LectureGuideDesktopHeader() {
   const [activeTab, setActiveTab] = useState("All Lectures");
@@ -28,9 +30,10 @@ function LectureGuideDesktopHeader() {
     setSelectedChapter(subjectId);
   };
 
+  const handleSubmit = () => {};
+
   useEffect(() => {
-    // console.log("Selected Chapter:", selectedChapter);
-    dispatch(subjectFilter());
+    dispatch(chapterFilter());
   }, [dispatch, selectedChapter]);
 
   return (
@@ -122,7 +125,7 @@ function LectureGuideDesktopHeader() {
           </button>
           {popupActive && (
             <PopupWrapper onClose={() => setPopUpActive(false)}>
-              <div className="w-full max-w-md mx-auto bg-green-300">
+              <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
                 <label
                   htmlFor="chapter"
                   className="block text-lg font-semibold mb-2"
@@ -150,7 +153,8 @@ function LectureGuideDesktopHeader() {
                     </option>
                   ))}
                 </select>
-              </div>
+                <button>Submit</button>
+              </form>
             </PopupWrapper>
           )}
         </div>
